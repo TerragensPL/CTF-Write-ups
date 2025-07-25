@@ -20,7 +20,7 @@ nmap -p- -sS -sV -sC --open -min-rate=1000 -n -vvv -Pn 10.0.3.33
     
 - Miramos el código base
     
-    `CTRL+Z`
+    `CTRL+U`
     
     ![image.png](./imagenes/image%20132.png)
     
