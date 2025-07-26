@@ -8,9 +8,7 @@ Es una herramienta que se pone entre nuestro navegador web y el Servidor . Es ca
     
     
     <aside>
-    💡
-    
-    ¡¡OJO!! Esta configuración impedirá que naveguemos normalmente por internet en el navegador donde la utilicemos. Para volver a navegar normalmente debemos volver a poner la configuración de “ Connection Settings” en “Use system proxy settings”
+    💡¡¡OJO!! Esta configuración impedirá que naveguemos normalmente por internet en el navegador donde la utilicemos. Para volver a navegar normalmente debemos volver a poner la configuración de “ Connection Settings” en “Use system proxy settings”
     
     </aside>
     
