@@ -20,7 +20,7 @@ nmap -p- -sS -sV -sC --open -min-rate=2000 -n -vvv -Pn 10.0.3.30
     
     A simple vista no hay nada interesante pero vamos a revisar el código fuente.
     
-    `CTRL+Z`
+    `CTRL+U`
     
     ![image.png](./imagenes/image%2088.png)
     
