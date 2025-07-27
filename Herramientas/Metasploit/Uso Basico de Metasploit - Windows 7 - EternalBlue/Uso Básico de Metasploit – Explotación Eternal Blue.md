@@ -1,4 +1,4 @@
-# Uso Básico de Metasploit – Explotación EternalBlue en Windows
+# Uso Básico de Metasploit – Explotación EternalBlue
 
 Maquinas que vamos a utilizar Kali Linux y Windows 7 vulnerable
 
