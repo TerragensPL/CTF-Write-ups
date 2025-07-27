@@ -2,7 +2,7 @@
 
 Maquinas que vamos a utilizar Kali Linux y Windows 7 vulnerable
 
-Hemos hecho la búsqueda de equipos en la red como hemos aprendido anteriormente y hemos escogido un maquina y un puerto para hacerle un script de vulnerabilidades 
+Hemos hecho la búsqueda de equipos en la red y hemos escogido un maquina y un puerto para hacerle un script de vulnerabilidades 
 
 ```bash
 nmap --script "vuln" -p445 10.0.3.6
