@@ -8,7 +8,7 @@ Hemos hecho la búsqueda de equipos en la red como hemos aprendido anteriormente
 nmap --script "vuln" -p445 10.0.3.6
 ```
 
-Siendo este el resultado:
+Siendo este el resultado: 
 
 ![image.png](./imagenes/image.png)
 
