@@ -42,7 +42,7 @@ Copiamos el CVE y lo apuntamos por que lo vamos a necesitar. **CVE-2017-0143**
 
 O desde el **menú de aplicaciones**:
 
-![image.png](./imagenes/image%201.png)
+![image.png](/imagenes/image%201.png)
 
 - Ya dentro del del Metasploit vamos a utilizar el comando **search.**
     
