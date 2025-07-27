@@ -1,6 +1,7 @@
 # Uso Básico de Metasploit – Explotación vsftpd en Linux
 
-**Vamos a usar la maquina virtual vulnerable Metasploitable2 se trata de una máquina que presenta multitud de vulnerabilidades, lo que nos permite practicar pentesting de una forma sencilla.**
+Maquinas que vamos a utilizar Kali Linux y Metasploitable2 (se trata de una máquina que presenta multitud de vulnerabilidades, lo que nos permite practicar pentesting de una forma sencilla).
+
 
 ![image.png](./imagenes/image.png)
 
