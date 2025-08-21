@@ -1,4 +1,4 @@
-# *******Attacktive Directory
+# Attacktive Directory
 
 ![image.png](./imagenes/AttacktiveDirectory/image.png)
 
